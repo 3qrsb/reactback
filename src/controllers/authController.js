@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
@@ -27,7 +28,10 @@ const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        res.status(200).json({ message: 'Login successful' });
+
+        const token = jwt.sign({ id: user._id }, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MzZkMmU1ZDYyMmQxZGEwZTZkYzBkMiIsImlhdCI6MTcxNDg2OTE1MywiZXhwIjoxNzE0ODcyNzUzfQ.Hm8vGpyL5vJLR_rs2OvTNWoI0PGhZxEfWNCAYX-BwhM', { expiresIn: '1h' });
+
+        res.status(200).json({ token });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

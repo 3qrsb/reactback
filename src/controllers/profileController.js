@@ -6,7 +6,13 @@ const getProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.status(200).json(user);
+        res.status(200).json({
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName,
+            dateOfBirth: user.dateOfBirth,
+            address: user.address
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -28,7 +34,13 @@ const updateProfile = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.status(200).json(user);
+        res.status(200).json({
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName,
+            dateOfBirth: user.dateOfBirth,
+            address: user.address
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
