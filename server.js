@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./src/routes/authRoutes');
+const profileRoutes = require('./src/routes/profileRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -22,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/reactbackdb', {
 });
 
 app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
 
 // Handle other routes
 app.get('/', (req, res) => {
